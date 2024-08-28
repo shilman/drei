@@ -8,7 +8,7 @@ import { Setup } from '../Setup'
 
 import { useGLTF, AccumulativeShadows, RandomizedLight, OrbitControls, Environment } from '../../src'
 
-export default {
+const meta = {
   title: 'Staging/AccumulativeShadows',
   component: AccumulativeShadows,
   decorators: [
@@ -19,6 +19,7 @@ export default {
     ),
   ],
 } satisfies Meta<typeof AccumulativeShadows>
+export default meta
 
 type Story = StoryObj<typeof AccumulativeShadows>
 

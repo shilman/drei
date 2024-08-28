@@ -4,7 +4,7 @@ import { svg } from './favicon'
 const config: StorybookConfig = {
   staticDirs: ['./public'],
   stories: ['./stories/**/*.stories.{ts,tsx}'],
-  addons: ['@storybook/addon-essentials', '@chromatic-com/storybook'],
+  addons: ['@storybook/addon-essentials', '@chromatic-com/storybook', '@storybook/experimental-addon-vitest'],
 
   // Favicon (inline svg https://stackoverflow.com/questions/66935329/use-inline-svg-as-favicon)
   managerHead: (head) => `
@@ -32,6 +32,8 @@ const config: StorybookConfig = {
       },
     },
   },
+
+  logLevel: 'debug',
 }
 
 export default config

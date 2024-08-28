@@ -80,7 +80,6 @@ float findBlocker(sampler2D shadowMap, vec2 uv, float compare, float angle) {
   vec2 offset = vec2(0.);
   float depth = 0.;
 
-  #pragma unroll_loop_start
   for(int i = 0; i < ${samples}; i ++) {
     offset = (vogelDiskSample(j, ${samples}, angle) * texelSize) * 2.0 * PENUMBRA_FILTER_SIZE;
     depth = unpackRGBAToDepth( texture2D( shadowMap, uv + offset));
@@ -90,7 +89,6 @@ float findBlocker(sampler2D shadowMap, vec2 uv, float compare, float angle) {
     }
     j++;
   }
-  #pragma unroll_loop_end
 
   if (blockers > 0.0) {
     return blockerDepthSum / blockers;
@@ -105,14 +103,12 @@ float vogelFilter(sampler2D shadowMap, vec2 uv, float zReceiver, float filterRad
   int j = 0;
   vec2 vogelSample = vec2(0.0);
   vec2 offset = vec2(0.0);
-  #pragma unroll_loop_start
   for (int i = 0; i < ${samples}; i++) {
     vogelSample = vogelDiskSample(j, ${samples}, angle) * texelSize;
     offset = vogelSample * (1.0 + filterRadius * float(${size}));
     shadow += step( zReceiver, unpackRGBAToDepth( texture2D( shadowMap, uv + offset ) ) );
     j++;
   }
-  #pragma unroll_loop_end
   return shadow * 1.0 / ${samples}.0;
 }
 
